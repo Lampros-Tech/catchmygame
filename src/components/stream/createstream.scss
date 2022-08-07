@@ -29,7 +29,7 @@ $gradient-color: linear-gradient(
 
     button.cs-button {
       margin: 0.7rem 0.5rem;
-      background: $gradient-color;
+      background: red;
       border: none;
       border-radius: 5px;
       color: white;
@@ -54,7 +54,7 @@ $gradient-color: linear-gradient(
       display: flex;
       justify-content: center;
       svg {
-        fill: #ff0083;
+        fill: red;
         height: 2rem;
         width: 3rem;
       }

@@ -1,9 +1,18 @@
 import React from "react";
 import "./MakeSchedule.scss";
+import { create, CID } from "ipfs-http-client";
 import { useDropzone } from "react-dropzone";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useEffect } from "react";
+import Upload from "../homepage/assets/Component.svg";
+// import Upload from "../styles/man.png";
 import pic from "./loginbg1.png";
-function MakeSchedule() {
+function MakeSchedule({ account, contract }) {
+  const [title, setTitle] = useState("");
+  const [des, setDes] = useState("");
+  const [rights, setRights] = useState("");
+  const [price, setPrice] = useState();
+
   const [yourImage, setImage] = useState([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/*",
@@ -17,29 +26,108 @@ function MakeSchedule() {
       );
     },
   });
+  const profile_picture = useRef(null);
+  const [profile_image, setProfile_image] = useState();
+  const [profile_image_url, setProfile_image_url] = useState();
 
+  const [start_date, setStart_date] = useState();
+
+  function reset(e) {
+    setProfile_image(null);
+  }
+  function startdate(e) {
+    setStart_date(e.target.value);
+  }
+  const [end_date, setEnddate] = useState();
+  function enddate(e) {
+    setEnddate(e.target.value);
+  }
+  const [end_time, setEndtime] = useState();
+  function endtime(e) {
+    setEndtime(e.target.value);
+  }
+  const [start_time, setStarttime] = useState();
+  function starttime(e) {
+    setStarttime(e.target.value);
+  }
+  async function UploadImage(e) {
+    const file = e.target.files[0];
+    setProfile_image(file);
+    try {
+      const client = create("https://ipfs.infura.io:5001/api/v0");
+      const added = await client.add(file);
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      setProfile_image_url(url);
+    } catch (error) {
+      console.log("Error uploading file: ", error);
+    }
+  }
+
+  const getScheduledDetails = async (e) => {
+    const time1 = start_date + " " + start_time;
+    const time2 = end_date + " " + end_time;
+    const tx = await contract.scheduleStream(
+      account,
+      profile_image_url,
+      title,
+      des,
+      time1,
+      time2,
+      rights,
+      price
+    );
+    tx.wait();
+  };
   return (
     <div className="App">
-      <div className="image-hero">
-        <img src={pic} alt="" />
+      <div >
+        <img src={pic} alt=""className="image-hero" />
       </div>
       <div class="container">
         <h1>FORM</h1>
 
-        <form className="ms-form">
+        <section>
           <div class="column">
             {/* <label for="myfile">Cover Image:</label>
             <input type="file" id="myfile" name="myfile"></input> */}
           </div>
           <div className="fileupload">
-            <div {...getRootProps()}>
-              <input className="ms-input" {...getInputProps()} />
-              {isDragActive ? (
-                <p>Drag 'n' drop some files here,</p>
-              ) : (
-                <p> click here to upload cover Photo</p>
-              )}
-            </div>
+            {profile_image ? (
+              <>
+                <img
+                  src={profile_image_url}
+                  className="uploaded_image-editprofile"
+                  alt="user_avatar"
+                />
+                <button
+                  className="reset-btn"
+                  onClick={(e) => {
+                    reset(e);
+                  }}
+                >
+                  reset
+                </button>
+              </>
+            ) : (
+              <div
+                className="upload-profile-picture"
+                onClick={(e) => {
+                  profile_picture.current.click();
+                }}
+              >
+                <img src={Upload} className="upload-image" alt="user_avatar" placeholder="upload_image"/>
+              </div>
+            )}
+            <input
+              className="input-edit-profile"
+              type="file"
+              hidden
+              // defaultValue={nameOfUser}
+              ref={profile_picture}
+              onChange={(e) => {
+                UploadImage(e);
+              }}
+            />
             <div>
               {yourImage.map((upFile) => {
                 return (
@@ -60,18 +148,9 @@ function MakeSchedule() {
               className="ms-input"
               type="text"
               id="name"
-              placeholder="Your Title here"
+              placeholder="Stream Title"
+              onChange={(event) => setTitle(event.target.value)}
             />
-
-            <div class="column">
-              {/* <label for="start">Start date:</label> */}
-              <input
-                className="ms-input"
-                type="date"
-                id="start"
-                name="trip-start"
-              />
-            </div>
           </div>
 
           <div class="column">
@@ -80,31 +159,91 @@ function MakeSchedule() {
               className="ms-input"
               type="text"
               id="subject"
-              placeholder="Your Discription here"
+              placeholder="Stream Description"
+              onChange={(event) => setDes(event.target.value)}
             />
 
             <div class="column">
-              {/* <label for="contact">Price</label> */}
-              <input
-                className="ms-input"
-                type="number"
-                id="price"
-                placeholder="Price here"
-              />
               <div class="column">
                 {/* <label for="name">Input</label> */}
                 <input
                   className="ms-input"
                   type="text"
                   id="name"
-                  placeholder="Your Title here"
+                  placeholder="Enter Wallet Address"
+                  onChange={(event) => setRights(event.target.value)}
+                />
+              </div>
+              {/* <label for="contact">Price</label> */}
+              <input
+                className="ms-input"
+                type="number"
+                id="price"
+                placeholder="Price here"
+                onChange={(event) => setPrice(event.target.value)}
+              />
+              <div className="date-time">
+                <label for="start" className="start">
+                  Start date:
+                </label>
+                <input
+                  type="date"
+                  id="start"
+                  name="trip-start"
+                  min="2022-08-07"
+                  max="2022-12-31"
+                  onChange={(e) => {
+                    startdate(e);
+                  }}
+                />
+                <label for="appt" className="start">
+                  Select a time:
+                </label>
+                <input
+                  type="time"
+                  id="appt"
+                  name="appt"
+                  onChange={(e) => {
+                    starttime(e);
+                  }}
+                />
+              </div>
+              <div className="date-time">
+                <label for="start" className="start">
+                  End date:
+                </label>
+                <input
+                  type="date"
+                  id="start"
+                  name="trip-start"
+                  min="2022-08-07"
+                  max="2022-12-31"
+                  onChange={(e) => {
+                    enddate(e);
+                  }}
+                />
+                <label for="appt" className="start">
+                  Select end time:
+                </label>
+                <input
+                  type="time"
+                  id="appt"
+                  name="appt"
+                  onChange={(e) => {
+                    endtime(e);
+                  }}
                 />
               </div>
             </div>
           </div>
 
-          <button className="action-button">Submit</button>
-        </form>
+          <button
+            className="action-button"
+            onClick={(e) => getScheduledDetails()}
+          >
+            Submit
+          </button>
+        </section>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ import onebeat from "./artifacts/contracts/OneBeat.sol/OneBeat.json";
 import metamask from "./components/mm.png";
 import coinbase from "./components/wc.png";
 
-const contractAddress = "0xaa8bb4F1a0F690012D8aE31bAba41B36B26cfEd9";
+const contractAddress = "0xC0203f1dDdE0bC3FEB62a79c1aB5c5be2c4d8Ca2";
 
 function App() {
   const { activate, deactivate } = useWeb3React();
@@ -62,8 +62,8 @@ function App() {
       window.location.reload();
     });
 
-    if (chainId !== 4) {
-      alert("Please connect to rinkeby network");
+    if (chainId !== 80001) {
+      alert("Please connect to polygon network");
     }
     window.ethereum.on("accountsChanged", async function (accounts) {
       setAccount(connected);

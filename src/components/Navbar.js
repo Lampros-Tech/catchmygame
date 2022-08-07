@@ -46,7 +46,7 @@ const Navbar = ({ setOpenWalletOption }) => {
                     window.location.pathname === "/streams" ? "active" : null
                   }
                 >
-                  <Link to="/streams">All Streams</Link>
+                  <Link to="/streams">All Sports</Link>
                 </li>
                 <li
                   className={
@@ -73,7 +73,7 @@ const Navbar = ({ setOpenWalletOption }) => {
                       : null
                   }
                 >
-                  <Link to="/live-stream">Live Streams</Link>
+                  <Link to="/live-stream">Live Sports</Link>
                 </li>
                 <li
                   className={

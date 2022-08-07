@@ -6,7 +6,7 @@
   
   align-content: center;
   color: #fff;
-padding: 10px 20px;
+    padding: 10px 20px;
   font-size: 18px;
   margin: 0;
   height: 100px;
@@ -15,6 +15,7 @@ padding: 10px 20px;
   .navbar-left {
       font-weight: 700;
       font-size: 20px;
+      margin-top: -40px;
 
       .navbar-logo{
           font-family: Inconsolata;
