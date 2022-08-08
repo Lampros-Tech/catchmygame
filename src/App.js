@@ -22,7 +22,7 @@ import Cookies from "universal-cookie";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
-import onebeat from "./artifacts/contracts/OneBeat.sol/OneBeat.json";
+import onebeat from "./artifacts/contracts/CatchMyGame.sol/CatchMyGame.json";
 
 import metamask from "./components/mm.png";
 import coinbase from "./components/wc.png";

@@ -7,7 +7,7 @@ import { create, CID } from "ipfs-http-client";
 import { NFTStorage, File, Blob } from "nft.storage"
 import { MediaFactory } from "@zoralabs/core/dist/typechain/MediaFactory";
 import { ethers } from "ethers";
-import onebeat from "./OneBeat.json";
+import onebeat from "./catchMyGame.json";
 import Decimal from "@zoralabs/core/dist/utils/Decimal";
 import {  arrayify,  formatBytes32String,  formatUnits,  sha256,} from 'ethers/lib/utils';
 
