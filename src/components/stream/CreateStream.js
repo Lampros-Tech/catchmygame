@@ -83,7 +83,9 @@ function CreateStream({ account, contract }) {
     });
     console.log(stream_);
     console.log(stream_.streamKey);
-    stream_.setRecord(true);
+    if (record) {
+      stream_.setRecord(true);
+    }
     const current_stream = await livepeerObject.Stream.get(stream_.id);
     console.log("video id" + stream_.id);
     const result = await current_stream.setRecord(true);
@@ -150,7 +152,13 @@ function CreateStream({ account, contract }) {
           placeholder="streamKey"
         /> */}
         <div className="cs-left-container">
-          <video className="cs-video" ref={videoEl} controls />
+          <video
+            className="cs-video"
+            ref={videoEl}
+            controls
+            height="500px"
+            width="500px"
+          />
           <div className="cs-btns">
             <button className="cs-button" onClick={onButtonClick}>
               Start

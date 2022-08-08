@@ -12,7 +12,7 @@ function Profile({ account, contract }) {
   const [imgSrc, setImgSrc] = useState(logo);
   const [showStreamings, setStreamings] = useState(true);
   const [showNFTs, setNFTs] = useState(false);
-  const [showCreateNFTs, setCreateNFTs] = useState(false);
+  // const [showCreateNFTs, setCreateNFTs] = useState(false);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [isLoading, setLoading] = React.useState(true);
   const [name, setName] = useState("Unknown");
@@ -60,6 +60,7 @@ function Profile({ account, contract }) {
                 alt="user-profile"
                 width="128px"
                 height="128px"
+                crossOrigin="anonymous"
               ></img>
             </div>
             <div className="profile-info">
@@ -97,7 +98,7 @@ function Profile({ account, contract }) {
               onClick={() => {
                 setStreamings(true);
                 setNFTs(false);
-                setCreateNFTs(false);
+                // setCreateNFTs(false);
               }}
               className={
                 showStreamings
@@ -111,7 +112,7 @@ function Profile({ account, contract }) {
               onClick={() => {
                 setStreamings(false);
                 setNFTs(true);
-                setCreateNFTs(false);
+                // setCreateNFTs(false);
               }}
               className={
                 showNFTs ? `profile-second-btns active` : `profile-second-btns`
@@ -119,7 +120,7 @@ function Profile({ account, contract }) {
             >
               NFTs
             </button>
-            <button
+            {/* <button
               onClick={() => {
                 setStreamings(false);
                 setNFTs(false);
@@ -132,7 +133,7 @@ function Profile({ account, contract }) {
               }
             >
               Create NFT
-            </button>
+            </button> */}
           </div>
           {showStreamings ? (
             <ProfileStreamings contract={contract} account={account} />
@@ -140,9 +141,9 @@ function Profile({ account, contract }) {
           {showNFTs ? (
             <ProfileNfts contract={contract} account={account} />
           ) : null}
-          {showCreateNFTs ? (
+          {/* {showCreateNFTs ? (
             <ProfileCreateNft contract={contract} account={account} />
-          ) : null}
+          ) : null} */}
         </section>
       </section>
     </>

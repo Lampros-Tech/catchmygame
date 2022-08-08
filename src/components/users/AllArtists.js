@@ -2,15 +2,40 @@ import React from "react";
 import user1 from "../users/styles/user1.jpg";
 import user2 from "../users/styles/user2.jpg";
 import user3 from "../users/styles/user3.jpg";
-import { useEffect, useState } from "react";
 import "../users/styles/allartists.scss";
+import { Contract } from "ethers";
+import { useEffect, useState } from "react";
+import LoadingAnimation from "./generalblocks/LoadingAnimation";
 
-function AllArtists() {
+function AllArtists({ account, contract }) {
+  const [isLoading, setLoading] = React.useState(true);
   const [data, setData] = useState([]);
+  const getProfileData = async (e) => {
+    const all = await contract.getAllUsers();
+    const num = all.length;
+    for (let i = 0; i < num; i++) {
+      const n = await contract.getCreator(all[i]);
+      let number_stream = await contract.getTotal(account);
+      number_stream = parseInt(number_stream._hex, 16);
+      data.push([n.photo_cid, n.creatorName, n.tokens.length, number_stream]);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getProfileData();
+    // setLoading(false);
+  }, [contract]);
+
+  if (isLoading) {
+    return <LoadingAnimation />;
+  }
+
+  // if (data.length > 0) {
   return (
     <>
       <section className="au-main-container">
-        <h1 className="au-heading">Gamers</h1>
+        <h1 className="au-heading">Artists</h1>
         <div className="au-grid-container">
           {/* ************************************************************* */}
           {data.map((inde) => {
@@ -35,11 +60,15 @@ function AllArtists() {
                 </div>
               </div>
             );
-          })}          {/* ************************************************************* */}
+          })}
+          {/* ************************************************************* */}
         </div>
       </section>
     </>
   );
+  // } else {
+  //   console.log("no");
+  // }
 }
 
 export default AllArtists;

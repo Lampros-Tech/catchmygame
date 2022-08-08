@@ -11,7 +11,7 @@ $gradient-color: linear-gradient(
 
 .cs {
   margin: auto;
-  min-height: 80vh;
+  min-height: calc(100vh - 152px);
   width: 80%;
   max-width: 80%;
   display: flex;
@@ -22,6 +22,7 @@ $gradient-color: linear-gradient(
 
   .cs-left-container {
     min-width: 60%;
+    width: 60%;
     padding-top: 30px;
     video.cs-video {
       width: 100%;
@@ -29,7 +30,7 @@ $gradient-color: linear-gradient(
 
     button.cs-button {
       margin: 0.7rem 0.5rem;
-      background: red;
+      background: $gradient-color;
       border: none;
       border-radius: 5px;
       color: white;
@@ -54,7 +55,7 @@ $gradient-color: linear-gradient(
       display: flex;
       justify-content: center;
       svg {
-        fill: red;
+        fill: #ff0083;
         height: 2rem;
         width: 3rem;
       }

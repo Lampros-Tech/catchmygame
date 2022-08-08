@@ -82,7 +82,7 @@ const Navbar = ({ setOpenWalletOption }) => {
                       : null
                   }
                 >
-                  <Link to="/all-artists">All Artists</Link>
+                  <Link to="/all-artists">All Gamers</Link>
                 </li>
                 <li
                   className={

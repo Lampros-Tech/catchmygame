@@ -46,7 +46,7 @@ $gradient-color: linear-gradient(
       padding: 16px 32px;
       border-radius: 10px;
       svg.ps-video-play-svg {
-        fill: #ff0083;
+        fill: red;
       }
     }
   }
@@ -70,6 +70,7 @@ $gradient-color: linear-gradient(
     text-align: left;
     margin: 0%;
     padding: 5% 0%;
+    font-size: 1rem;
   }
   .ps-nft-div {
     display: flex;
@@ -84,27 +85,11 @@ $gradient-color: linear-gradient(
       flex-direction: column;
       justify-content: flex-start;
     }
-    button.ps-nfts-buy-button {
-      margin: 0.7rem 0;
-      background: $gradient-color;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      background-size: 600% 200%;
-      animation: gradient 4s linear infinite;
-      animation-direction: alternate;
-    }
-    button.ps-nfts-buy-button:hover {
-      cursor: pointer;
-    }
   }
   p {
     padding: 5% 0%;
     margin: 0%;
-    color: #a9a9a9;
+    color: red;
   }
   h6 {
     margin: 0%;
@@ -112,5 +97,22 @@ $gradient-color: linear-gradient(
     font-size: medium;
     font-weight: 400;
     text-align: left;
+    color: red;
+  }
+  button {
+    margin: 0.7rem 0;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    background-size: 600% 200%;
+    animation: gradient 4s linear infinite;
+    animation-direction: alternate;
+  }
+  button:hover {
+    cursor: pointer;
   }
 }
