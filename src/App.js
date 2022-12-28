@@ -12,7 +12,7 @@ import AllNfts from "./components/nft/AllNfts";
 import MakeSchedule from "./components/schedulestreams/MakeSchedule";
 import SingleUser from "./components/users/SingleUser";
 import Profile from "./components/users/Profile";
-import CreateNft from "./components/users/generalblocks/CreateNft"
+import CreateNft from "./components/users/generalblocks/CreateNft";
 /********************* CSS CLASS ********************/
 import "./index.css";
 import "./App.css";
@@ -184,7 +184,7 @@ function App() {
             {/* <Route exact path="/" element={<Stream />} /> */}
             <Route
               exact
-              path="/live-sports"
+              path="/live-stream"
               element={<LiveSports contract={contract} account={account} />}
             />
             <Route
@@ -230,7 +230,6 @@ function App() {
               element={<Profile contract={contract} account={account} />}
             />
             <Route exact path="/create-nft" element={<CreateNft />} />
-
           </Routes>
         </div>
       </Router>

@@ -29,11 +29,11 @@ const Navbar = ({ setOpenWalletOption }) => {
             <img src={logo} alt="logo" height="128px"></img>
           </div>
         </div>
-        <div className="navbar-middle">
-          {/* <div className="searchbar">
+        {/* <div className="navbar-middle">
+          <div className="searchbar">
             <input type="text" />
-          </div> */}
-        </div>
+          </div>
+        </div> */}
         <div className="navbar-right">
           <ul>
             <li className={window.location.pathname === "/" ? "active" : null}>
@@ -46,7 +46,7 @@ const Navbar = ({ setOpenWalletOption }) => {
                     window.location.pathname === "/streams" ? "active" : null
                   }
                 >
-                  <Link to="/streams">All Sports</Link>
+                  <Link to="/streams">All Streams</Link>
                 </li>
                 <li
                   className={
@@ -64,16 +64,16 @@ const Navbar = ({ setOpenWalletOption }) => {
                       : null
                   }
                 >
-                  <Link to="/create-stream">Create Streams</Link>
+                  <Link to="/create-stream">Create Stream</Link>
                 </li>
                 <li
                   className={
-                    window.location.pathname === "/live-stream"
+                    window.location.pathname === "/live-sports"
                       ? "active"
                       : null
                   }
                 >
-                  <Link to="/live-stream">Live Sports</Link>
+                  <Link to="/live-stream">Live Stream</Link>
                 </li>
                 <li
                   className={
@@ -82,7 +82,7 @@ const Navbar = ({ setOpenWalletOption }) => {
                       : null
                   }
                 >
-                  <Link to="/all-artists">All Gamers</Link>
+                  <Link to="/all-artists">All Artists</Link>
                 </li>
                 <li
                   className={

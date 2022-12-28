@@ -32,28 +32,30 @@ function ScheduledStreams({ account, contract }) {
   }
   return (
     <div className="main">
-      <div className="stream-title">
-        <h1>Scheduled Streams</h1>
-      </div>
-      {data.map((inde) => {
-        return (
-          <div className="card-container">
-            <div className="main-card">
-              <div className="stream-image">
-                <img src={inde[0]} alt="" className="cover-img" />
-              </div>
-              <div className="card-title">
-                <h1>{inde[1]}</h1>
-                <span className="card-description">{inde[2]}</span>
-                <div className="date-time">
-                  <p>Start Time : {inde[3]}</p>
+      <div className="main-inner-div">
+        <div className="stream-title">
+          <h1>Scheduled Streams</h1>
+        </div>
+        {data.map((inde) => {
+          return (
+            <div className="card-container">
+              <div className="main-card">
+                <div className="stream-image">
+                  <img src={inde[0]} alt="" className="cover-img" />
                 </div>
+                <div className="card-title">
+                  <h1>{inde[1]}</h1>
+                  <span className="card-description">{inde[2]}</span>
+                  <div className="date-time">
+                    <p>Start Time : {inde[3]}</p>
+                  </div>
+                </div>
+                <button className="book-button">BOOK NOW</button>
               </div>
-              <button className="book-button">BOOK NOW</button>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -2,9 +2,10 @@ import React, { useState, useRef } from "react";
 import { useEffect } from "react";
 import { create, CID } from "ipfs-http-client";
 import Upload from "../styles/man.png";
+import { Web3Storage } from "web3.storage";
 
 export default function EditProfile({ account, contract, closeModal }) {
-  const [name, setName] = useState("Unknown");
+  const [name, setName] = useState("");
   const KeyCodes = {
     comma: 188,
     enter: 13,
@@ -26,15 +27,26 @@ export default function EditProfile({ account, contract, closeModal }) {
     const file = e.target.files[0];
     // console.log(file);
     setProfile_image(file);
-    try {
-      const client = create("https://ipfs.infura.io:5001/api/v0");
-      const added = await client.add(file);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      setProfile_image_url(url);
-      console.log(url);
-    } catch (error) {
-      console.log("Error uploading file: ", error);
+    const client = new Web3Storage({
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGRDOGI5MDZiNUIyMjJFM2Y4MTUzRTI1OEE3OEFGNzZCQkU2NDdGYzgiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Njg5NDE4NzgzNzgsIm5hbWUiOiJBbGxUaGF0RGF0YSJ9.sk1dShkPApqlSWYsNiZiY1sWUh1SDr8uRaMdc1npDNg",
+    });
+    const fileInput = document.querySelector('input[type="file"]');
+
+    const rootCid = await client.put(fileInput.files, {
+      name: "cat pics",
+      maxRetries: 3,
+    });
+    const res = await client.get(rootCid); // Web3Response
+    const files = await res.files(profile_image); // Web3File[]
+    let f = "";
+    for (const file of files) {
+      f = file.cid;
     }
+
+    const url = `https://` + `${f}` + `.ipfs.w3s.link`;
+    setProfile_image_url(url);
+    console.log(url);
   }
 
   const getUserDetails = async (e) => {
@@ -43,6 +55,7 @@ export default function EditProfile({ account, contract, closeModal }) {
     console.log(name);
     console.log(profile_image_url);
   };
+
   return (
     <>
       <div className="modalBackground">

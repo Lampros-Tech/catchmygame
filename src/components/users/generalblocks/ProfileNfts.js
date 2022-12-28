@@ -1,17 +1,15 @@
 import React from "react";
 import img from "../styles/Gaming4-5.jpg";
 import { ethers } from "ethers";
-import mainnetZoraAddresses from "@zoralabs/v3/dist/addresses/1.json"; // Mainnet addresses, 4.json would be Rinkeby Testnet 
-import {useState} from 'react'
-
+// import mainnetZoraAddresses from "@zoralabs/v3/dist/addresses/1.json"; // Mainnet addresses, 4.json would be Rinkeby Testnet
+import { useState } from "react";
 
 function ProfileNfts() {
-
   let [error, setErr] = useState(null);
   const [contract, setContract] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const contract_address = '0xCe6cEf2A9028e1C3B21647ae3B4251038109f42a'
+  const contract_address = "0xCe6cEf2A9028e1C3B21647ae3B4251038109f42a";
   const _abi = [
     {
       inputs: [

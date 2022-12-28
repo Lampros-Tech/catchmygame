@@ -89,7 +89,7 @@ $gradient-color: linear-gradient(
   p {
     padding: 5% 0%;
     margin: 0%;
-    color: red;
+    color: white;
   }
   h6 {
     margin: 0%;
@@ -97,11 +97,22 @@ $gradient-color: linear-gradient(
     font-size: medium;
     font-weight: 400;
     text-align: left;
-    color: red;
+    color: white;
   }
   button {
     margin: 0.7rem 0;
-    background: red;
+    background: linear-gradient(
+      90deg,
+      #fe0000,
+      #f71f1f,
+      #e75353,
+      #f71f1f,
+      #fe0000,
+      #f71f1f
+    );
+    background-size: 600% 200%;
+    animation: gradient 4s linear infinite;
+    animation-direction: alternate;
     border: none;
     border-radius: 5px;
     color: white;

@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Upload from "../homepage/assets/Component.svg";
 // import Upload from "../styles/man.png";
-import pic from "./loginbg1.png";
+import pic from "./b-img.jpg";
 function MakeSchedule({ account, contract }) {
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
@@ -79,171 +79,181 @@ function MakeSchedule({ account, contract }) {
     tx.wait();
   };
   return (
-    <div className="App">
-      <div >
-        <img src={pic} alt=""className="image-hero" />
-      </div>
-      <div class="container">
-        <h1>FORM</h1>
-
-        <section>
-          <div class="column">
-            {/* <label for="myfile">Cover Image:</label>
+    <div className="make-schedule-background">
+      <div className="make-schedule-background-inner-div">
+        <div class="container">
+          <section>
+            <div class="column">
+              {/* <label for="myfile">Cover Image:</label>
             <input type="file" id="myfile" name="myfile"></input> */}
-          </div>
-          <div className="fileupload">
-            {profile_image ? (
-              <>
-                <img
-                  src={profile_image_url}
-                  className="uploaded_image-editprofile"
-                  alt="user_avatar"
-                />
-                <button
-                  className="reset-btn"
+            </div>
+            <div className="fileupload">
+              {profile_image ? (
+                <>
+                  <img
+                    src={profile_image_url}
+                    className="uploaded_image-editprofile"
+                    alt="user_avatar"
+                  />
+                  <button
+                    className="reset-btn"
+                    onClick={(e) => {
+                      reset(e);
+                    }}
+                  >
+                    reset
+                  </button>
+                </>
+              ) : (
+                <div
+                  className="upload-profile-picture"
                   onClick={(e) => {
-                    reset(e);
+                    profile_picture.current.click();
                   }}
                 >
-                  reset
-                </button>
-              </>
-            ) : (
-              <div
-                className="upload-profile-picture"
-                onClick={(e) => {
-                  profile_picture.current.click();
+                  <img
+                    src={Upload}
+                    className="upload-image"
+                    alt="user_avatar"
+                    placeholder="upload_image"
+                  />
+                </div>
+              )}
+              <input
+                className="input-edit-profile"
+                type="file"
+                hidden
+                // defaultValue={nameOfUser}
+                ref={profile_picture}
+                onChange={(e) => {
+                  UploadImage(e);
                 }}
-              >
-                <img src={Upload} className="upload-image" alt="user_avatar" placeholder="upload_image"/>
+              />
+              <div>
+                {yourImage.map((upFile) => {
+                  return (
+                    <div>
+                      <img
+                        src="{upFile.preview}"
+                        style={{ width: "100px", height: "100px" }}
+                        alt="preview"
+                      />
+                    </div>
+                  );
+                })}
               </div>
-            )}
-            <input
-              className="input-edit-profile"
-              type="file"
-              hidden
-              // defaultValue={nameOfUser}
-              ref={profile_picture}
-              onChange={(e) => {
-                UploadImage(e);
-              }}
-            />
-            <div>
-              {yourImage.map((upFile) => {
-                return (
-                  <div>
-                    <img
-                      src="{upFile.preview}"
-                      style={{ width: "100px", height: "100px" }}
-                      alt="preview"
-                    />
-                  </div>
-                );
-              })}
             </div>
-          </div>
-          <div class="column">
-            {/* <label for="name">Title</label> */}
-            <input
-              className="ms-input"
-              type="text"
-              id="name"
-              placeholder="Stream Title"
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </div>
-
-          <div class="column">
-            {/* <label for="subject">Discription</label> */}
-            <input
-              className="ms-input"
-              type="text"
-              id="subject"
-              placeholder="Stream Description"
-              onChange={(event) => setDes(event.target.value)}
-            />
-
             <div class="column">
-              <div class="column">
-                {/* <label for="name">Input</label> */}
-                <input
-                  className="ms-input"
-                  type="text"
-                  id="name"
-                  placeholder="Enter Wallet Address"
-                  onChange={(event) => setRights(event.target.value)}
-                />
-              </div>
-              {/* <label for="contact">Price</label> */}
+              {/* <label for="name">Title</label> */}
               <input
                 className="ms-input"
-                type="number"
-                id="price"
-                placeholder="Price here"
-                onChange={(event) => setPrice(event.target.value)}
+                type="text"
+                id="name"
+                placeholder="Stream Title"
+                onChange={(event) => setTitle(event.target.value)}
               />
-              <div className="date-time">
-                <label for="start" className="start">
-                  Start date:
-                </label>
+            </div>
+
+            <div class="column">
+              {/* <label for="subject">Discription</label> */}
+              <input
+                className="ms-input"
+                type="text"
+                id="subject"
+                placeholder="Stream Description"
+                onChange={(event) => setDes(event.target.value)}
+              />
+
+              <div class="column">
+                <div class="column">
+                  {/* <label for="name">Input</label> */}
+                  <input
+                    className="ms-input"
+                    type="text"
+                    id="start"
+                    placeholder="Enter Wallet Address"
+                    onChange={(event) => setRights(event.target.value)}
+                  />
+                </div>
+                {/* <label for="contact">Price</label> */}
                 <input
-                  type="date"
+                  className="ms-input"
+                  type="number"
                   id="start"
-                  name="trip-start"
-                  min="2022-08-07"
-                  max="2022-12-31"
-                  onChange={(e) => {
-                    startdate(e);
-                  }}
+                  placeholder="Price here"
+                  onChange={(event) => setPrice(event.target.value)}
                 />
-                <label for="appt" className="start">
-                  Select a time:
-                </label>
-                <input
-                  type="time"
-                  id="appt"
-                  name="appt"
-                  onChange={(e) => {
-                    starttime(e);
-                  }}
-                />
-              </div>
-              <div className="date-time">
-                <label for="start" className="start">
-                  End date:
-                </label>
-                <input
-                  type="date"
-                  id="start"
-                  name="trip-start"
-                  min="2022-08-07"
-                  max="2022-12-31"
-                  onChange={(e) => {
-                    enddate(e);
-                  }}
-                />
-                <label for="appt" className="start">
-                  Select end time:
-                </label>
-                <input
-                  type="time"
-                  id="appt"
-                  name="appt"
-                  onChange={(e) => {
-                    endtime(e);
-                  }}
-                />
+                <div className="date-time">
+                  <div>
+                    <label for="start" className="start">
+                      Start date:
+                    </label>
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-start"
+                      min="2022-08-07"
+                      max="2022-12-31"
+                      onChange={(e) => {
+                        startdate(e);
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label for="appt" className="start">
+                      Select time:
+                    </label>
+                    <input
+                      type="time"
+                      id="start"
+                      name="appt"
+                      onChange={(e) => {
+                        starttime(e);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="date-time">
+                  <div>
+                    <label for="start" className="start">
+                      End date:
+                    </label>
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-start"
+                      min="2022-08-07"
+                      max="2022-12-31"
+                      onChange={(e) => {
+                        enddate(e);
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label for="appt" className="start">
+                      Select time:
+                    </label>
+                    <input
+                      type="time"
+                      id="start"
+                      name="appt"
+                      onChange={(e) => {
+                        endtime(e);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <button
-            className="action-button"
-            onClick={(e) => getScheduledDetails()}
-          >
-            Submit
-          </button>
-        </section>
+            <button
+              className="action-button"
+              onClick={(e) => getScheduledDetails()}
+            >
+              Submit
+            </button>
+          </section>
+        </div>
       </div>
     </div>
   );
